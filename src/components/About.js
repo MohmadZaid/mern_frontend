@@ -18,14 +18,8 @@ const About = () => {
     console.log(json);
   }
 
-  useEffect(() => {
-
-
-    
+  useEffect(() => {   
     getDataUser()
-
-
-
   }, [])
 
 

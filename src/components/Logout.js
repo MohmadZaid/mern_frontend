@@ -1,8 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../Context/UserState'
 
 
 const Logout = () => {
+
+    const {setUserLogin} = useContext(UserContext)
+
     const navigate = useNavigate()
 
     const logoutUser = async () => {
@@ -17,6 +21,7 @@ const Logout = () => {
 
         const json = await res.json()
         console.log(json);
+        setUserLogin(false)
         navigate('/login',)
 
     }

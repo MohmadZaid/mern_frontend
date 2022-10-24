@@ -3,17 +3,17 @@ import NoteAdd from './NoteAdd'
 import NoteItem from './NoteItem'
 
 const Notes = () => {
-    const [noteData, setNote] = useState([])
+    const [noteData, setNote] = useState([])   // [] - more then 4 hours to realised map work on array show default put array [] sign not {} . 
     console.log(noteData);
-    const getnoteUser =  () => {
+    const getnoteUser = () => {
         fetch('/note/shownote', {
             method: "GET",
             headers: {
                 "content-Type": "application/json"
             }
-        }).then((res)=>{
+        }).then((res) => {
             return res.json()
-        }).then((data)=>{
+        }).then((data) => {
             console.log(data);
             setNote(data)
         })
@@ -22,8 +22,8 @@ const Notes = () => {
     useEffect(() => {
         console.log("useEffectttt");
         getnoteUser()
-       
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+    }, [noteData]) 
 
     return (
         <>
@@ -33,11 +33,14 @@ const Notes = () => {
                     <button type="button" className="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Notes</button>
                 </div>
 
-                {noteData.map((note) => {
-                    return (
-                        <NoteItem title={note.title} description={note.description}  />
-                    );
-                })}
+                <div className='d-flex flex-wrap align-items-start mt-3 gap-3'>
+                    {noteData.map((note) => {
+                        return (
+                            <NoteItem title={note.title} description={note.description} key={note._id} />
+                        );
+                    })}
+                </div>
+
 
 
             </div>

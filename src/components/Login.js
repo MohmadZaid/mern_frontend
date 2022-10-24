@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
-
+import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../Context/UserState'
 const Login = () => {
 
+  const Navigate = useNavigate();
+  const {setUserLogin} = useContext(UserContext)
   const [login, setLogin] = useState({ email: "", password: "" })
   // console.log(login)
   const valChange = (e) => {
@@ -29,6 +32,8 @@ const Login = () => {
     if (data.success) {
       window.alert("Login Successfully")
       setLogin({ email: "", password: "" })
+      setUserLogin(true)
+      Navigate("/note")
     } else {
       window.alert(`Error - ${data.message}`)
     }
